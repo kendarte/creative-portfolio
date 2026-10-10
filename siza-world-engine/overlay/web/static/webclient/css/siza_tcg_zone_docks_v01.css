@@ -1,0 +1,314 @@
+/* Book-only TCG state piles, rival hand and active-turn readout. */
+
+.bookTcgZoneDock {
+  position: absolute;
+  z-index: 44;
+  display: grid;
+  gap: 4px;
+  pointer-events: none;
+}
+
+/* Rival piles occupy the top-right rail, not the battlefield. */
+.bookTcgZoneDock-enemy {
+  top: 8px;
+  right: 12px;
+  width: 294px;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
+
+/* Player piles use the left gutter. */
+.bookTcgZoneDock-player {
+  top: 188px;
+  left: 12px;
+  width: 76px;
+  grid-template-columns: 1fr;
+}
+
+.bookTcgPile {
+  position: relative;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 7px 3px 17px;
+  border: 1px solid rgba(106,78,48,.58);
+  border-radius: 4px;
+  background: rgba(24,17,12,.82);
+  box-shadow: 0 4px 11px rgba(0,0,0,.24);
+  color: #d6c29c;
+  backdrop-filter: blur(2px);
+}
+
+.bookTcgPile::before,
+.bookTcgPile::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  width: 7px;
+  height: 10px;
+  border: 1px solid rgba(207,179,126,.48);
+  border-radius: 1px;
+  background: rgba(50,35,24,.86);
+}
+
+.bookTcgPile::before {
+  top: 7px;
+  transform: rotate(-5deg);
+}
+
+.bookTcgPile::after {
+  top: 8px;
+  left: 7px;
+  transform: rotate(4deg);
+}
+
+.bookTcgPileLabel {
+  font: 800 6px/1 system-ui,sans-serif;
+  letter-spacing: .08em;
+  color: rgba(219,198,158,.76);
+}
+
+.bookTcgPileCount {
+  font: 700 10px/1 Georgia,serif;
+  color: #f0ddb4;
+}
+
+/*
+  RIVAL HAND
+  Real enemy.hand count, identities hidden. It owns the top-centre lane and is forced visible.
+*/
+.bookEnemyHandV03 {
+  position: absolute !important;
+  z-index: 68 !important;
+  left: 220px !important;
+  right: 320px !important;
+  top: 5px !important;
+  width: auto !important;
+  height: 49px !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+.bookEnemyHandV03::before {
+  content: "MANO RIVAL";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  padding: 4px 6px;
+  border: 1px solid rgba(156,106,62,.64);
+  border-radius: 4px;
+  background: rgba(31,19,12,.88);
+  color: #d9bd8b;
+  font: 900 6px/1 system-ui,sans-serif;
+  letter-spacing: .12em;
+}
+
+.bookEnemyHandCardsV03 {
+  height: 47px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding-top: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.bookEnemyCardBackV03 {
+  --enemy-card-rot: 0deg;
+  --enemy-card-rise: 0px;
+  --enemy-card-delay: 0ms;
+  position: relative !important;
+  display: block !important;
+  flex: 0 0 35px !important;
+  width: 35px !important;
+  height: 48px !important;
+  margin-left: -10px !important;
+  border: 2px solid rgba(211,177,111,.88) !important;
+  border-radius: 4px !important;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(190,142,70,.28) 0 17%,transparent 18%),
+    linear-gradient(135deg,#1b2530,#0c151e 52%,#2b1b12) !important;
+  box-shadow: 0 6px 13px rgba(0,0,0,.5), inset 0 0 0 2px rgba(15,9,6,.8), inset 0 0 0 3px rgba(194,151,82,.22) !important;
+  transform: rotate(var(--enemy-card-rot)) translateY(var(--enemy-card-rise)) !important;
+  transform-origin: 50% 110% !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.bookEnemyCardBackV03:first-child {
+  margin-left: 0 !important;
+}
+
+.bookEnemyCardBackV03::after {
+  content: "S";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%,-50%) rotate(45deg);
+  border: 1px solid rgba(218,178,103,.64);
+  color: rgba(238,207,145,.82);
+  font: 700 8px/1 Georgia,serif;
+}
+
+.bookEnemyHandCountV03 {
+  position: absolute !important;
+  right: 0 !important;
+  top: 5px !important;
+  min-width: 25px !important;
+  height: 25px !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 5px !important;
+  border: 1px solid rgba(183,132,68,.82) !important;
+  border-radius: 999px !important;
+  background: rgba(27,16,10,.94) !important;
+  color: #f0d9a7 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,.38) !important;
+  font: 700 11px/1 Georgia,serif !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.bookEnemyHandV03[data-change="draw"] .bookEnemyCardBackV03 {
+  animation: bookEnemyDrawV03 .42s var(--enemy-card-delay) cubic-bezier(.16,.84,.24,1.08) both;
+}
+
+.bookEnemyHandV03[data-change="play"] {
+  animation: bookEnemyPlayV03 .38s ease both;
+}
+
+@keyframes bookEnemyDrawV03 {
+  0% { opacity:0; transform:translateY(-42px) rotate(var(--enemy-card-rot)) scale(.72); }
+  72% { opacity:1; transform:translateY(calc(var(--enemy-card-rise) + 4px)) rotate(var(--enemy-card-rot)) scale(1.05); }
+  100% { opacity:1; transform:rotate(var(--enemy-card-rot)) translateY(var(--enemy-card-rise)) scale(1); }
+}
+
+@keyframes bookEnemyPlayV03 {
+  0%,100% { transform:scale(1); }
+  45% { transform:scale(.94); }
+}
+
+/*
+  TURN / PHASE READOUT
+  The old tiny pill is replaced visually by a strong actor card. The real phase text remains live.
+*/
+.sizaCombatReadoutV02 {
+  position: absolute !important;
+  z-index: 72 !important;
+  left: 12px !important;
+  top: 8px !important;
+  transform: none !important;
+  width: 194px !important;
+  min-width: 194px !important;
+  min-height: 40px !important;
+  padding: 6px 10px 7px !important;
+  text-align: left !important;
+  border: 1px solid rgba(169,121,66,.82) !important;
+  border-radius: 5px !important;
+  background: rgba(31,20,13,.94) !important;
+  box-shadow: 0 7px 18px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,225,165,.05) !important;
+  pointer-events: none !important;
+}
+
+.sizaCombatReadoutV02::before {
+  content: "TU ACTÚAS";
+  display: block;
+  color: #f1d499;
+  font: 900 10px/1 system-ui,sans-serif;
+  letter-spacing: .12em;
+}
+
+.sizaCombatReadoutV02[data-owner="enemy"]::before {
+  content: "RIVAL ACTÚA";
+  color: #e7a294;
+}
+
+.sizaCombatReadoutV02 .owner {
+  display: none !important;
+}
+
+.sizaCombatReadoutV02 .phase {
+  display: block !important;
+  margin-top: 5px !important;
+  color: #f1dfbd !important;
+  font: 700 12px/1 Georgia,serif !important;
+  letter-spacing: .04em !important;
+}
+
+.sizaCombatReadoutV02 .phase::before {
+  content: "FASE · ";
+  color: #b89462;
+  font: 800 7px/1 system-ui,sans-serif;
+  letter-spacing: .10em;
+}
+
+/* During a real player decision the actor card remains the single visual authority. */
+.matchBoardV5[data-siza-v02-decision] .sizaCombatReadoutV02 {
+  border-color: rgba(222,177,93,.95) !important;
+  box-shadow: 0 0 20px rgba(207,157,73,.14),0 7px 18px rgba(0,0,0,.34) !important;
+}
+
+@media (max-width:850px) {
+  .bookTcgZoneDock-enemy {
+    right: 8px;
+    width: 220px;
+  }
+
+  .bookTcgZoneDock-player {
+    left: 8px;
+    width: 60px;
+  }
+
+  .bookTcgPile {
+    height: 24px;
+    padding-left: 15px;
+    padding-right: 5px;
+  }
+
+  .bookEnemyHandV03 {
+    left: 170px !important;
+    right: 238px !important;
+    height: 45px !important;
+  }
+
+  .bookEnemyHandV03::before {
+    display: none;
+  }
+
+  .bookEnemyCardBackV03 {
+    flex-basis: 29px !important;
+    width: 29px !important;
+    height: 42px !important;
+    margin-left: -10px !important;
+  }
+
+  .bookEnemyHandCountV03 {
+    min-width: 21px !important;
+    height: 21px !important;
+    font-size: 9px !important;
+  }
+
+  .sizaCombatReadoutV02 {
+    left: 8px !important;
+    width: 148px !important;
+    min-width: 148px !important;
+    padding: 5px 7px 6px !important;
+  }
+
+  .sizaCombatReadoutV02::before {
+    font-size: 8px;
+  }
+
+  .sizaCombatReadoutV02 .phase {
+    font-size: 10px !important;
+  }
+}

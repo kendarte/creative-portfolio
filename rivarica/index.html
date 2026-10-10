@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rivarica World Book v1.8</title>
+<style>
+body{margin:0;background:#0d1112;color:#eee;font:16px system-ui;display:grid;place-items:center;min-height:100vh}
+#load{padding:24px;text-align:center;max-width:720px}
+a{color:#d4b16c}
+</style>
+</head>
+<body>
+<div id="load">Cargando Rivarica World Book v1.8…</div>
+<script src="chunks/pako-00.js?v=18fix4"></script>
+<script src="chunks/pako-01.js?v=18fix4"></script>
+<script src="chunks/pako-02.js?v=18fix4"></script>
+<script>
+(async function(){
+  const load=document.getElementById('load');
+  try {
+    const pakoSource=(window.PAKO_SRC||[]).join('');
+    if(!pakoSource) throw new Error('No se cargó el descompresor local');
+    (0,eval)(pakoSource);
+    if(!window.pako) throw new Error('No se pudo iniciar el descompresor local');
+
+    const files=[
+      'content/wb18-00.txt','content/wb18-01.txt','content/wb18-02.txt','content/wb18-03.txt','content/wb18-04.txt',
+      'content/wb18-05a.txt','content/wb18-05b.txt','content/wb18-05c.txt','content/wb18-05d.txt',
+      'content/wb18-06.txt','content/wb18-07.txt','content/wb18-08.txt','content/wb18-09.txt','content/wb18-10.txt',
+      'content/wb18-11a.txt','content/wb18-11b.txt','content/wb18-11c.txt','content/wb18-11d.txt','content/wb18-11e.txt','content/wb18-11f.txt'
+    ];
+
+    const parts=await Promise.all(files.map(async path=>{
+      const url=path+'?v=18fix4';
+      const response=await fetch(url,{cache:'no-store'});
+      if(!response.ok) throw new Error(`No se pudo cargar ${path} (${response.status})`);
+      return (await response.text()).trim();
+    }));
+
+    const b64=parts.join('');
+    if(b64.length!==136904) throw new Error(`Payload incompleto: ${b64.length}/136904`);
+
+    const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+    let text=window.pako.ungzip(bin,{to:'string'});
+    if(!text || !text.includes('Rivarica World Book v1.8')) throw new Error('El World Book reconstruido no es válido');
+
+    const rivaricaPatches=`<script>
+(function(){
+  async function applyRivaricaPatches(){
+    try{
+      const response=await fetch('source/worldbook/darkhaven-canon-v1.html?v=dh1',{cache:'no-store'});
+      if(!response.ok)throw new Error('Darkhaven canon '+response.status);
+      const canonHtml=await response.text();
+      const headings=Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6'));
+      const start=headings.find(el=>String(el.textContent||'').trim().toUpperCase().startsWith('XIV. DARKHAVEN'));
+      const end=headings.find(el=>String(el.textContent||'').trim().toUpperCase().startsWith('XXIV. LEY FINAL DEL MUNDO'));
+      const template=document.createElement('template');
+      template.innerHTML=canonHtml.trim();
+      if(start&&end&&start.compareDocumentPosition(end)&Node.DOCUMENT_POSITION_FOLLOWING){
+        const range=document.createRange();
+        range.setStartBefore(start);
+        range.setEndBefore(end);
+        range.deleteContents();
+        end.parentNode.insertBefore(template.content,end);
+      }else{
+        document.body.insertBefore(template.content,document.body.firstChild);
+      }
+      document.documentElement.dataset.darkhavenCanon='v1';
+
+      const characterSources=[
+        'source/worldbook/personajes-publicos-v1.html?v=char1',
+        'source/worldbook/personajes-publicos-anexo-v1.html?v=char2'
+      ];
+      for(const path of characterSources){
+        const charResponse=await fetch(path,{cache:'no-store'});
+        if(!charResponse.ok)throw new Error('Archivo de personajes '+charResponse.status+' '+path);
+        const charHtml=await charResponse.text();
+        const template=document.createElement('template');
+        template.innerHTML=charHtml.trim();
+        const section=template.content.querySelector('section');
+        if(section && !document.getElementById(section.id)){
+          const finalHeading=Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6')).find(el=>String(el.textContent||'').trim().toUpperCase().startsWith('XXIV. LEY FINAL DEL MUNDO'));
+          if(finalHeading)finalHeading.parentNode.insertBefore(template.content,finalHeading);
+          else document.body.appendChild(template.content);
+        }
+      }
+      document.documentElement.dataset.characterArchive='v2';
+
+      if(!document.getElementById('rivarica-character-shortcut')){
+        const shortcut=document.createElement('a');
+        shortcut.id='rivarica-character-shortcut';
+        shortcut.href='personajes/';
+        shortcut.textContent='PERSONAJES';
+        shortcut.setAttribute('aria-label','Abrir archivo de personajes de Rivarica');
+        shortcut.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;padding:10px 14px;border:1px solid #6c5b39;border-radius:999px;background:rgba(13,17,18,.92);color:#d4b16c;text-decoration:none;font:700 12px system-ui,sans-serif;letter-spacing:.12em;box-shadow:0 8px 30px rgba(0,0,0,.35)';
+        document.body.appendChild(shortcut);
+      }
+    }catch(error){
+      console.error('No se pudieron aplicar los parches públicos de Rivarica',error);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',applyRivaricaPatches,{once:true});
+  else applyRivaricaPatches();
+})();
+<\/script>`;
+    const closeBody=text.toLowerCase().lastIndexOf('</body>');
+    text=closeBody>=0?text.slice(0,closeBody)+rivaricaPatches+text.slice(closeBody):text+rivaricaPatches;
+
+    document.open();
+    document.write(text);
+    document.close();
+  } catch(e) {
+    load.innerHTML='No se pudo abrir el World Book v1.8.<br>'+String(e)+'<br><br><a href="atlas/">Abrir Atlas de Caribia</a>';
+  }
+})();
+</script>
+</body>
+</html>

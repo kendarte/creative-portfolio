@@ -1,0 +1,82 @@
+:root{--siza-card-paper:#e8dec8;--siza-card-ink:#19150f;--siza-gold:#b98c43}
+
+/* Queen-reference layout. Pure HTML/CSS: no pre-rendered full-card image is used. */
+.sizaCardTemplateQueenV3{--siza-accent:#3e8fc2;--siza-accent-dark:#0f3650;--siza-frame:#07131c;position:relative;container-type:inline-size;color:var(--siza-card-ink);font-family:Georgia,'Times New Roman',serif;overflow:hidden;background:#06131d}
+.sizaCardTemplateQueenV3.affinity-azul,.sizaCardTemplateQueenV3.blue{--siza-accent:#3b9bd0;--siza-accent-dark:#0b3857}
+.sizaCardTemplateQueenV3.affinity-rojo,.sizaCardTemplateQueenV3.red{--siza-accent:#b94d43;--siza-accent-dark:#551c1a}
+.sizaCardTemplateQueenV3.affinity-multi,.sizaCardTemplateQueenV3.multi{--siza-accent:#8ca8bc;--siza-accent-dark:#17354a}
+.sizaCardTemplateQueenV3.affinity-land,.sizaCardTemplateQueenV3.land{--siza-accent:#777d80;--siza-accent-dark:#252a2d}
+.sizaCardTemplateQueenV3.type-artifact{--siza-accent:#7a947e;--siza-accent-dark:#26372d}
+
+.sizaGeneratedCard.sizaCardTemplateQueenV3{width:300px;aspect-ratio:5/7;padding:0;border:1px solid #8e6d38;border-radius:19px;box-shadow:0 18px 48px rgba(0,0,0,.38);overflow:hidden}
+.sizaGeneratedCard.sizaCardTemplateQueenV3.compact{width:220px}
+.sizaCardTemplateQueenV3.generatedCardV1{position:relative!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;padding:0!important;border:1px solid #8e6d38!important;border-radius:12px!important;background:#06131d!important;overflow:hidden!important;color:var(--siza-card-ink)!important}
+
+.sizaCardTemplateQueenV3 .sizaQueenLayoutV3{position:absolute;inset:0;display:block!important;height:100%!important;min-height:0!important;border:0!important;border-radius:inherit;background:radial-gradient(circle at 55% 26%,#164664 0,#0a2639 32%,#071722 64%,#040b10 100%);overflow:hidden}
+.sizaCardTemplateQueenV3 .sizaQueenLayoutV3:before{content:"";position:absolute;inset:2.2%;z-index:20;pointer-events:none;border:1px solid rgba(211,166,81,.7);border-radius:4.5%;box-shadow:inset 0 0 0 2px rgba(19,101,143,.55),inset 0 0 0 4px rgba(3,12,18,.75)}
+.sizaCardTemplateQueenV3 .sizaQueenLayoutV3:after{content:"";position:absolute;inset:4%;z-index:19;pointer-events:none;border:1px solid rgba(66,151,198,.65);border-radius:3.8%}
+
+/* Title plate: centered high, leaving room for crystal rail and Manafestation badge. */
+.sizaCardTemplateQueenV3 .sizaCardTitlePlateV3{position:absolute!important;left:17%;top:5.2%;width:64%;height:8.6%;z-index:8;display:flex!important;align-items:center;justify-content:center;padding:0 4%;border:1px solid #aa7c37;border-radius:999px;background:linear-gradient(180deg,#f0e5cc,#d9c49c 58%,#b99a68);box-shadow:inset 0 0 0 2px rgba(255,248,224,.32),0 1px 0 #051018;color:#241a10;text-align:center}
+.sizaCardTemplateQueenV3 .sizaCardNameV2{display:block;min-width:0;width:100%;font-size:5.2cqw;font-weight:700;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px rgba(255,255,255,.35)}
+
+/* Manafestation requirement: top right. */
+.sizaCardTemplateQueenV3 .sizaManafestBadgeV3{position:absolute!important;right:2.8%!important;top:3.3%!important;width:16.8%!important;aspect-ratio:1!important;height:auto!important;min-width:0!important;z-index:12;display:grid!important;place-items:center;padding:0!important;border:2px solid #b88a42!important;border-radius:50%!important;background:radial-gradient(circle at 44% 36%,#1f6897 0,#0c3858 46%,#07151f 73%)!important;color:#f7edd4!important;font-size:10.6cqw!important;font-weight:700!important;line-height:1!important;letter-spacing:-.04em!important;text-shadow:0 2px 2px #000;box-shadow:inset 0 0 0 2px #112532,0 0 0 2px rgba(22,77,109,.9),0 2px 5px rgba(0,0,0,.55)!important}
+.sizaCardTemplateQueenV3.type-land .sizaManafestBadgeV3{font-size:5.4cqw!important;letter-spacing:.02em!important}
+
+/* Crystal requirement rail: top left. The capsules are CSS objects, not PNG/SVG card art. */
+.sizaCardTemplateQueenV3 .sizaCardCrystalRailV3{position:absolute;left:4.4%;top:15.2%;width:10.8%;height:38.8%;z-index:10;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:2.1%;padding:1.5% 1.2%;border:1px solid rgba(182,136,59,.72);border-radius:999px;background:linear-gradient(90deg,#07141d,#0c2a3b 50%,#07141d);box-shadow:inset 0 0 0 1px rgba(69,145,185,.35)}
+.sizaCardTemplateQueenV3 .sizaCardCrystalRailV3.is-empty:after{content:"";position:absolute;left:33%;right:33%;top:7%;bottom:7%;border-left:1px solid rgba(119,151,166,.25);border-right:1px solid rgba(119,151,166,.15)}
+.sizaCrystalV3{position:relative;display:block;flex:1 1 0;min-height:0;max-height:32%;width:100%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.65))}
+.sizaCrystalCapV3{position:absolute;left:22%;right:22%;top:0;height:11%;border:1px solid #78828a;border-radius:60% 60% 20% 20%;background:linear-gradient(#d4d9dc,#59636a 55%,#262c30)}
+.sizaCrystalGlassV3{position:absolute;left:13%;right:13%;top:8%;bottom:17%;border:1px solid rgba(190,210,221,.7);border-radius:42% 42% 24% 24%;background:linear-gradient(90deg,rgba(255,255,255,.2),rgba(178,208,220,.06) 28%,rgba(15,24,28,.18) 70%,rgba(255,255,255,.14));box-shadow:inset 0 0 5px rgba(186,222,239,.22);overflow:hidden}
+.sizaCrystalBaseV3{position:absolute;left:12%;right:12%;bottom:3%;height:18%;border:1px solid #80613e;border-radius:35% 35% 45% 45%;background:linear-gradient(#b1885d,#6f4c30 56%,#3d281a)}
+.sizaCrystalGemV3{position:absolute;left:22%;right:22%;top:22%;bottom:18%;display:block;border-radius:46% 35% 52% 28%;transform:rotate(9deg);box-shadow:inset 1px 1px 2px rgba(255,255,255,.5),0 0 4px currentColor;background:currentColor}
+.crystal-u{color:#27a4ef}.crystal-r{color:#d94b3f}.crystal-g{color:#49a96b}.crystal-w{color:#e6d8c0}.crystal-b{color:#423f48}
+.crystal-u .sizaCrystalGemV3{clip-path:polygon(46% 0,100% 30%,80% 100%,16% 88%,0 29%)}
+.crystal-r .sizaCrystalGemV3{clip-path:polygon(38% 0,92% 15%,100% 70%,55% 100%,8% 84%,0 26%)}
+.crystal-g .sizaCrystalGemV3{border-radius:50% 45% 55% 40%}
+.crystal-w .sizaCrystalGemV3{clip-path:polygon(45% 0,100% 28%,78% 100%,16% 85%,0 31%)}
+.crystal-b .sizaCrystalGemV3{clip-path:polygon(32% 0,78% 8%,100% 56%,65% 100%,12% 83%,0 29%)}
+
+/* Art block follows the Queen card proportions. */
+.sizaCardTemplateQueenV3 .sizaCardArtV2{position:absolute!important;left:16.2%!important;top:15.1%!important;width:78.8%!important;height:39.9%!important;min-height:0!important;margin:0!important;padding:0!important;z-index:3;border:1px solid rgba(187,137,61,.9)!important;border-radius:2.3%!important;background:linear-gradient(145deg,#174b6a,#081e2c 62%,#12171d)!important;overflow:hidden!important;box-shadow:inset 0 0 0 2px rgba(10,53,78,.8)}
+.sizaGeneratedArt,.sizaCardTemplateQueenV3 .generatedArtImageV1{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:center;display:block}
+.sizaGeneratedArtFallback{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:2%;color:#dcecf3;background:radial-gradient(circle at 50% 42%,rgba(57,136,180,.84),rgba(5,25,38,.97) 68%)}
+.affinity-rojo .sizaGeneratedArtFallback,.red .sizaGeneratedArtFallback{background:radial-gradient(circle at 50% 42%,rgba(178,66,55,.84),rgba(42,13,16,.97) 68%)}
+.affinity-land .sizaGeneratedArtFallback,.land .sizaGeneratedArtFallback{background:radial-gradient(circle at 50% 42%,rgba(86,91,89,.84),rgba(20,24,25,.98) 68%)}
+.sizaGeneratedArtFallback span,.sizaCardTemplateQueenV3 .artGlyph{font-size:20cqw;line-height:1}.sizaGeneratedArtFallback small,.sizaCardTemplateQueenV3 .artLabel{font-size:3.2cqw;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.sizaCardTemplateQueenV3 .artGlyph,.sizaCardTemplateQueenV3 .artLabel{position:absolute;left:0;right:0;text-align:center;color:#e2edf2}.sizaCardTemplateQueenV3 .artGlyph{top:29%}.sizaCardTemplateQueenV3 .artLabel{top:66%}
+
+/* Type bar directly under art. */
+.sizaCardTemplateQueenV3 .sizaCardTypeV2{position:absolute!important;left:14.8%!important;top:55.8%!important;width:80.2%!important;height:7.1%!important;z-index:9;display:flex!important;align-items:center;justify-content:center;padding:0 7%!important;border:1px solid #a97b37!important;border-radius:999px!important;background:linear-gradient(180deg,var(--siza-accent-dark),#071722)!important;color:#edf1ed!important;font-size:4.1cqw!important;font-weight:700!important;letter-spacing:.025em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 0 1px rgba(79,157,194,.45)}
+
+/* Rules panel. */
+.sizaCardTemplateQueenV3 .sizaCardRulesV2{position:absolute!important;left:12.7%!important;top:63.8%!important;width:74.6%!important;height:24.1%!important;min-height:0!important;z-index:5;display:flex!important;flex-direction:column;justify-content:center;padding:6.2% 7.2%!important;border:1px solid #9f793f!important;border-radius:8% 8% 10% 10%!important;background:radial-gradient(ellipse at center,#efe5ce,#dfcfac 70%,#c6ab79)!important;color:#241c13!important;font-size:4.1cqw!important;line-height:1.22!important;text-align:center;overflow:hidden!important;box-shadow:inset 0 0 0 2px rgba(255,250,229,.3)}
+.sizaCardTemplateQueenV3 .sizaCardRulesTextV2{white-space:pre-line}
+.sizaCardTemplateQueenV3 .sizaCardFlavorV2{margin-top:5%;padding-top:4%;border-top:1px solid rgba(89,69,42,.28);font-style:italic;font-size:.9em;color:#4f4234}
+
+/* Separate Force / Resistance plates, like the reference card. */
+.sizaCardTemplateQueenV3 .sizaStatPlateV3{position:absolute;bottom:2.5%;width:18.5%;aspect-ratio:1;z-index:13;display:grid;place-items:center;border:2px solid #a77936;border-radius:50%;color:#f6ead1;font-size:10.4cqw;font-weight:700;line-height:1;text-shadow:0 2px 2px #000;box-shadow:inset 0 0 0 2px rgba(8,24,34,.9),0 2px 4px rgba(0,0,0,.55)}
+.sizaCardTemplateQueenV3 .sizaStatLeftV3{left:1.6%;background:radial-gradient(circle at 43% 35%,#236a9b,#0b314d 60%,#07141d)}
+.sizaCardTemplateQueenV3 .sizaStatRightV3{right:1.6%;background:radial-gradient(circle at 43% 35%,#a72f2d,#561818 60%,#170b0c)}
+
+.sizaCardTemplateQueenV3 .sizaCardFooterV2{position:absolute!important;left:31.5%!important;bottom:2.3%!important;width:37%!important;height:5.2%!important;min-height:0!important;z-index:11;display:flex!important;align-items:center;justify-content:center;padding:0 7%!important;border:1px solid #9e7437!important;border-radius:999px!important;background:linear-gradient(180deg,#123c55,#071722)!important;color:#e6ddc8!important;font-size:2.75cqw!important;font-weight:700!important;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sizaCardTemplateQueenV3 .sizaCardSetV2{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Hand and focus use the exact same anatomy; only the container changes size. */
+.handCardV5 .sizaCardTemplateQueenV3 .sizaCardFlavorV2{display:none}
+.handCardV5 .sizaCardTemplateQueenV3 .sizaCardRulesV2{font-size:3.7cqw!important;line-height:1.12!important;padding:5% 6%!important}
+.cardFocusV5 .sizaCardTemplateQueenV3 .sizaCardRulesV2,.fieldCardFocusV610 .sizaCardTemplateQueenV3 .sizaCardRulesV2{font-size:4.25cqw!important;line-height:1.24!important}
+
+/* Shared thumbnails preserve the same visual hierarchy without using full-card images. */
+.sizaGeneratedThumb,.generatedCardThumbV1{position:relative;width:100%;height:100%;min-width:0;min-height:0;border:1px solid #9a7339;border-radius:7px;background:#071722;color:#eee5d1;overflow:hidden;container-type:inline-size}
+.sizaCardThumbQueenV3 .sizaCardThumbHeaderV2{position:absolute;left:17%;top:5%;width:63%;height:10%;display:flex;align-items:center;justify-content:center;padding:0 3%;border:1px solid #896734;border-radius:999px;background:#ddcba7;color:#21180f;z-index:5}
+.sizaCardThumbQueenV3 .sizaGeneratedThumbName,.sizaCardThumbQueenV3 .generatedThumbNameV1{font:700 5.2cqw/1 Georgia,serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sizaCardThumbQueenV3 .sizaThumbDifficultyV3{position:absolute;right:3%;top:3%;width:17%;aspect-ratio:1;display:grid;place-items:center;border:1px solid #a77b39;border-radius:50%;background:#0d4265;color:#f5ead1;font:700 8cqw/1 Georgia,serif;z-index:6}
+.sizaCardThumbQueenV3 .sizaThumbCrystalRailV3{position:absolute;left:4%;top:16%;width:10%;height:39%;display:flex;flex-direction:column;gap:2%;z-index:6}
+.sizaCardThumbQueenV3 .sizaThumbCrystalRailV3 .sizaCrystalV3{max-height:32%}
+.sizaCardThumbQueenV3 .sizaGeneratedThumbArt,.sizaCardThumbQueenV3 .generatedThumbArtV1{position:absolute!important;left:16%!important;top:16%!important;width:79%!important;height:40%!important;border:1px solid #896734!important;background:#103750!important;overflow:hidden}
+.sizaCardThumbQueenV3 .sizaGeneratedThumbType,.sizaCardThumbQueenV3 .generatedThumbTypeV1{position:absolute!important;left:15%!important;top:57%!important;width:80%!important;height:8%!important;display:flex;align-items:center;justify-content:center;padding:0 5%!important;border:1px solid #896734!important;border-radius:999px;background:#0d3148;color:#eee5d1;font:700 3.4cqw/1 Georgia,serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sizaCardThumbQueenV3 .sizaGeneratedThumbStats,.sizaCardThumbQueenV3 .generatedThumbPtV1{position:absolute;right:4%;bottom:4%;padding:2% 3%;border:1px solid #8e6a37;border-radius:999px;background:#152c3b;color:#f1e7d0;font:700 4.3cqw/1 Georgia,serif;z-index:7}
+.sizaCardThumbQueenV3 .sizaGeneratedArtFallback span,.sizaCardThumbQueenV3 .artGlyph{font-size:18cqw}.sizaCardThumbQueenV3 .sizaGeneratedArtFallback small,.sizaCardThumbQueenV3 .artLabel{font-size:3cqw}

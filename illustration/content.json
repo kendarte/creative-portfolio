@@ -1,0 +1,19 @@
+{
+  "showLegacyProcessAtlas": false,
+  "showLegacyGalleryAtlas": false,
+  "process": [
+    {"slot":"Line Art","parts":"/creative-portfolio/media/illustration/process/line-art","partCount":8,"title":"Line Art"},
+    {"slot":"Color Pass","parts":"/creative-portfolio/media/illustration/process/color-pass","partCount":8,"title":"Color Pass"},
+    {"slot":"Final Lighting","parts":"/creative-portfolio/media/illustration/process/final-lighting","partCount":10,"title":"Final Lighting"}
+  ],
+  "gallery": [
+    {"src":"/creative-portfolio/media/illustration/gallery/536278618_10212924322740137_4310412701060649189_n.jpg","title":"Armored Swordsman — Action Pose Study","category":"Character illustration"},
+    {"src":"/creative-portfolio/media/illustration/gallery/536279575_10212924324300176_9147212142357010423_n_1.jpg","title":"Armored Swordsman — Inked Action Study","category":"Character illustration"},
+    {"src":"/creative-portfolio/media/illustration/gallery/539821593_10212924322060120_5022305332820658119_n.jpg","title":"Armored Swordsman — Manga Action Study","category":"Character illustration"},
+    {"src":"/creative-portfolio/media/illustration/gallery/514367973_10212602691419555_9201428506877884635_n.jpg","title":"Jake Turbo & Mac Lazerhoff — Costume & Character Study","category":"Visual development"},
+    {"src":"/creative-portfolio/media/illustration/gallery/514170513_10212602690459531_9190919229194804985_n.jpg","title":"Jake Turbo & Mac Lazerhoff — Character Line Study","category":"Visual development"},
+    {"src":"/creative-portfolio/media/illustration/gallery/514122066_10212602691699562_8421450163258053085_n.jpg","title":"Taek-Won-Cop Turbo — Character Poster Study","category":"Visual development"},
+    {"src":"/creative-portfolio/media/illustration/gallery/453143895_18411645559073634_6021239168329285252_n.jpg","title":"Character Figure — Color & Pose Study","category":"Illustration"},
+    {"src":"/creative-portfolio/media/illustration/gallery/187291985_6352417818117707_4766294772261070424_n.jpg","title":"Dog Portrait — Graphite Study","category":"Illustration"}
+  ]
+}
